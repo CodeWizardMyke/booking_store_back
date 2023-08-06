@@ -1,6 +1,6 @@
-const { Books } = require('../src/database/models')
+const { Books, Cart } = require('../src/database/models')
 
-const books = Books.findAll()
+const books = Cart.findAll()
 
 books
     .then( response => console.log(response) )
