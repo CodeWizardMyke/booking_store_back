@@ -1,7 +1,7 @@
-const { Books, Cart } = require('../src/database/models')
+const { Books, Cart, Users } = require('../src/database/models')
 
-const books = Cart.findAll()
+const Users = Cart.findAll()
 
-books
+Users
     .then( response => console.log(response) )
     .catch( error => console.log(error))

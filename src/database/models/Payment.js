@@ -22,5 +22,9 @@ module.exports = (sequelize, DataTypes) =>{
         tableName:'payment'
     });
 
+    Payment.associate = (models) =>{
+        Payment.belongsTo(models.Users, {foreignKey:'fk_id_user', as: 'user'})
+    }
+
     return Payment;
 }

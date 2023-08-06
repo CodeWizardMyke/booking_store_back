@@ -16,5 +16,9 @@ module.exports = (sequelize, DataTypes)=>{
         tableName:'bestsaler'
     });
 
+    Bestsaler.associate = (models) =>{
+        Bestsaler.belongsTo(models.Books, {foreignKey:'fk_id_books', as:'books'})
+    }
+
     return Bestsaler;
 }

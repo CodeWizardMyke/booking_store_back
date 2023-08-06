@@ -17,5 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         tableName:'feedback'
     });
 
+    Feedback.associate = (models) =>{
+        Feedback.belongsTo(models.Users, {foreignKey:'fk_id_user', as : 'user'})
+    }
+
     return Feedback;
 }

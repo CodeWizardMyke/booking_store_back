@@ -1,24 +1,18 @@
-module.exports = (sequelize, DataTypes) =>{ 
+module.exports = (sequelize, DataTypes) =>{
     const User_information = sequelize.define('User_information',{
         id_user_information:{
-            type:DataTypes.INTEGER,
-            primaryKey:true,
+            type: DataTypes.INTEGER,
+            primaryKey: true,
             autoIncrement:true,
-            allowNull:false,
-            unique:true
         },
         full_name:DataTypes.STRING,
         email:DataTypes.STRING,
         telephone:DataTypes.STRING,
         birth_date:DataTypes.STRING,
-        user_cpf:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            unique:true
-        },
+        user_cpf:DataTypes.STRING,
         user_rg:DataTypes.STRING,
-        city:DataTypes.STRING,
         state:DataTypes.STRING,
+        city:DataTypes.STRING,
         cep:DataTypes.STRING,
         district:DataTypes.STRING,
         road:DataTypes.STRING,
@@ -27,9 +21,13 @@ module.exports = (sequelize, DataTypes) =>{
         fk_id_user:DataTypes.INTEGER,
     },
     {
-        timestamps:true,
-        tableName:'user_information'
-    });
+        tableName: "user_information",
+        timestamps: true
+    })
 
-    return User_information;
+    User_information.associate = (models) =>{
+        User_information.belongsTo( models.Users, { foreignKey:"fk_id_user", as:'user' })
+    }
+
+    return User_information 
 }
