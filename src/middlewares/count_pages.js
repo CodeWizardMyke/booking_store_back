@@ -1,5 +1,5 @@
 
-const CountPages = (req, res, next) => {
+let CountPages = (req, res, next) => {
 
     // validação do number_page e conversao para um valor numerico
     if(!Number(req.headers.page)){
