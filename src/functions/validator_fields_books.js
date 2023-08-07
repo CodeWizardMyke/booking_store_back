@@ -1,7 +1,7 @@
 const {check} = require('express-validator');
 const path = require('path');
 
-const cheking_fields_books = [
+const validator_fields_book_put = [
     check('title').notEmpty().withMessage('*O campo titulo não pode estar vazio').bail(),
 
     check('author').notEmpty().withMessage('*O campo autor não pode estar vazio').bail()
@@ -55,4 +55,4 @@ const cheking_fields_books = [
     })
 ]
 
-module.exports = cheking_fields_books;
+module.exports = validator_fields_book_put

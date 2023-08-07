@@ -7,7 +7,6 @@ const { Op } = require('sequelize');
 //middlewares using for cheking fields
 const { validationResult }= require('express-validator');
 const deleteBookImage = require('../functions/deleteBookImage');
-const emptyValuesRemove = require('../functions/emptyValuesRemove');
 
 module.exports = {
 
@@ -48,10 +47,8 @@ module.exports = {
     pull_book: async (req, res) => {
         try {
             const {id_books} = req.headers;
-            
-            const newDataRecevied = emptyValuesRemove(req.body);
 
-            const catchErrors = validationResult(newDataRecevied);
+            const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
                 //caso ocorra algum erro remova a imagem recebida e retorne os erros para o cliente
                 req.file ? deleteBookImage(req.file.filename) : '';
@@ -65,7 +62,7 @@ module.exports = {
                 deleteBookImage(book.front_cover)
                 req.body.front_cover = req.file.filename;
             }
-            await book.update(newDataRecevied);
+            await book.update(req.body);
             await book.save();
 
             res.send(book)
