@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 
 //import functions
 const deleteUsersImage = require('../functions/deleteUsersImage');
+const { Op } = require('sequelize');
 
 module.exports = {
 
@@ -53,7 +54,7 @@ module.exports = {
             }
             
             const emailExists = await Users.findAll({where:{email:req.body.email}})
-            if(emailExists){
+            if(emailExists.length){
                 req.file ? deleteUsersImage(req.file.filename) : '';
                 return res.json({error:{email:'email já cadastrado no sistema'}});
             }
@@ -85,6 +86,31 @@ module.exports = {
         } catch (error) {
             res.json(error);
         }
-    }
-    
+    },
+
+    //advanced search users
+    get_user_id: async (req, res) => {
+        try {
+            const {id_user} = req.headers;
+
+            const userSearch = await Users.findByPk(id_user);
+
+            return res.json(userSearch)
+        } catch (error) {
+            res.json(error);
+        }
+    },
+    get_user_email: async (req, res) => {
+        try {
+            const {email} = req.headers;
+
+            const userSearch = await Users.findAndCountAll({
+                where:{ email: {[Op.like]:`%${email}%`} }
+            });
+
+            return res.json(userSearch)
+        } catch (error) {
+            res.json(error);
+        }
+    },
 }

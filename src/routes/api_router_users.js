@@ -18,4 +18,7 @@ router.post('/', multer_upload_img_users.single('user_avatar'), validator_fields
 router.put('/', multer_upload_img_users.single('user_avatar'), filterEmptyFields, validator_fields_users_put, users_controllers.put_user);
 router.delete('/', users_controllers.delete_user);
 
+router.get('/id', users_controllers.get_user_id);
+router.get('/email', users_controllers.get_user_email);
+
 module.exports = router;
