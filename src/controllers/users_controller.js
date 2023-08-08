@@ -1,4 +1,4 @@
-const {Users, Users_information} = require('../database/models');
+const { Users } = require('../database/models');
 
 //import bibliotecas js
 const { validationResult } = require('express-validator')
