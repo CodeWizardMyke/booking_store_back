@@ -2,11 +2,6 @@ const { User_information } = require('../database/models');
 
 //import bibliotecas js
 const { validationResult } = require('express-validator')
-const bcrypt = require('bcrypt')
-
-//import functions
-const deleteUsersImage = require('../functions/deleteUsersImage');
-const { Op } = require('sequelize');
 
 module.exports = {
 
@@ -44,18 +39,14 @@ module.exports = {
     },
     put_user_information: async (req, res) => {
         try {
+            const {id_user} = req.headers;
+
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
                 return res.json(catchErrors)
             }
             
-            const emailExists = await Users.findAll({where:{email:req.body.email}})
-            if(emailExists.length){
-                return res.json({error:{email:'email já cadastrado no sistema'}});
-            }
-            
-            const {id_user_information} = req.headers;
-            const userSearch = await User_information.findByPk(id_user_information);
+            const userSearch = await User_information.findOne({where:{fk_id_user:id_user}});
             await userSearch.update(req.body)
 
             return res.json(req.body)
@@ -65,12 +56,11 @@ module.exports = {
     },
     delete_user_information: async (req, res) => {
         try {
-            const {id_user_information} = req.headers;
+            const {id_user} = req.headers;
 
-            const userSearch = await User_information.findByPk(id_user);
-            await User_information.destroy({where:{id_user_information:id_user_information}})
+            const dataDeleted = await User_information.destroy({where:{fk_id_user:id_user}})
 
-            return res.json(userSearch)
+            return res.json(dataDeleted)
         } catch (error) {
             res.json(error);
         }
@@ -79,9 +69,9 @@ module.exports = {
     //advanced search user information
     get_user_information_id: async (req, res) => {
         try {
-            const {id_user_information} = req.headers;
+            const {id_user} = req.headers;
 
-            const userSearch = await Users.findByPk(id_user_information);
+            const userSearch = await Users.findOne({where:{fk_id_user:id_user}});
 
             return res.json(userSearch)
         } catch (error) {
