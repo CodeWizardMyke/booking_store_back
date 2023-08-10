@@ -30,5 +30,9 @@ module.exports = (sequelize, DataTypes) => {
         tableName:'cart'
     })
 
+    Cart.associate = (model) => {
+        Cart.hasMany(model.Payment, {foreignKey:'fk_id_cart', as :'payment'})
+    }
+
     return Cart;
 }

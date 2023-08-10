@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) =>{
 
     Payment.associate = (models) =>{
         Payment.belongsTo(models.Users, {foreignKey:'fk_id_user', as: 'user'})
+        Payment.belongsTo(models.Cart, {foreignKey:'fk_id_cart', as: 'cart'})
     }
 
     return Payment;
