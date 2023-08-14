@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes)=>{
         publication_date:DataTypes.STRING,
         dimensions:DataTypes.STRING,
         number_pages:DataTypes.STRING,
-        inventory:DataTypes.STRING,
+        inventory:DataTypes.INTEGER,
         language:DataTypes.STRING,
     },
     {
@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes)=>{
             otherKey:'fk_id_user',
             timestamps:false
         })
+        Books.hasMany(models.Cart, { foreignKey: 'fk_id_books', as:'cart' });
     }
 
     return Books;
