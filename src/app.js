@@ -13,6 +13,7 @@ const api_router_user_information = require('../src/routes/api_router_user_infor
 const api_router_cart = require('../src/routes/api_router_cart');
 const api_router_payment = require('../src/routes/api_router_payment');
 const api_router_feedback = require('../src/routes/api_router_feedback');
+const api_router_token_invalid = require('../src/routes/api_router_token_invalid');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/api/users/information', api_router_user_information);
 app.use('/api/cart', api_router_cart);
 app.use('/api/payment', api_router_payment);
 app.use('/api/feedback', api_router_feedback);
+app.use('/api/token', api_router_token_invalid);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
