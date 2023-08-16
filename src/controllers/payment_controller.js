@@ -21,6 +21,12 @@ module.exports = {
     },
     post: async (req, res) => {
         try {
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
+            
             //função para criar um objeto item com estruturas predefinidas externalizada para a função PaymentNewItem: 
             //Função PaymentNewItem é asyncrona recebe req, e retorna um objeto no formato do modelo Payment:
             const paymentItem = await PaymentNewItem(req);
@@ -35,6 +41,12 @@ module.exports = {
     },
     put: async (req, res) => {
         try {
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
+
             const { payment_id, payment_type,  status} = req.body;
             const response = await Payment.findByPk(payment_id);
             

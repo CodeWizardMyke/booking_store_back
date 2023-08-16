@@ -21,6 +21,12 @@ module.exports = {
     },
     post: async (req, res) => {
         try {
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
+            
             const {code} = req.body
 
             const response = await Token_invalid.create({code: code})

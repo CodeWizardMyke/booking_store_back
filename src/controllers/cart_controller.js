@@ -25,8 +25,13 @@ module.exports = {
     },
     post: async (req, res) => {
         try {
-            const bookResponse = await Books.findByPk(req.body.id_books);
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
 
+            const bookResponse = await Books.findByPk(req.body.id_books);
             const cartItem = CartNewItem(req, bookResponse);
             const itemCart = await Cart.create(cartItem);
 
@@ -39,6 +44,12 @@ module.exports = {
     },
     put: async (req, res) => {
         try {
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
+            
             const {type_selected, qtd_items} = req.body;
             
             const cartResponse = await Cart.findByPk(req.body.id_cart)

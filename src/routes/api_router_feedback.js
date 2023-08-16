@@ -8,11 +8,12 @@ const feedback_controller = require('../controllers/feedback_controller');
 const CountPages = require('../middlewares/count_pages');
 const authManager = require('../middlewares/authManager');
 const auth = require('../middlewares/auth');
+const validator_fields_feedback = require('../functions/validator_fields_feedback');
 
 //crud cart
 router.get('/', auth, CountPages, feedback_controller.get);
-router.post('/', auth, feedback_controller.post);
-router.put('/', authManager, feedback_controller.put);
+router.post('/', auth, validator_fields_feedback.post, feedback_controller.post);
+router.put('/', authManager,validator_fields_feedback.put, feedback_controller.put);
 router.delete('/',auth, feedback_controller.delete);
 
 //advance search

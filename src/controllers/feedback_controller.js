@@ -20,6 +20,12 @@ module.exports = {
     },
     post: async (req, res) => {
         try {
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
+
             const {fk_id_user, subject, msg} = req.body;
 
             const nData = {
@@ -39,6 +45,12 @@ module.exports = {
     },
     put: async (req, res) => {
         try {
+            const catchErrors = validationResult(req);
+            if(catchErrors.errors.length){
+                req.file ? deleteBookImage(req.file.filename) : '';
+                return res.json(catchErrors)
+            };
+            
             const {id_feedback, subject, msg, fk_id_user} = req.body
 
             const feedbackSearch = await Feedback.findByPk(id_feedback)
