@@ -1,4 +1,4 @@
-const { Cart, Books} = require('../database/models');
+const { Cart, Books, Users} = require('../database/models');
 
 //import bibliotecas js
 const { validationResult } = require('express-validator');
@@ -68,7 +68,7 @@ module.exports = {
             })
             return res.json(response)
         } catch (error) {
-            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
             console.log(error);
             res.status(500).json(msg);
         }
@@ -78,7 +78,15 @@ module.exports = {
     get_cart_by_id: async (req, res) => {
         try {
             const {id_cart} = req.headers;
+            const id_token = req.token_decoded.id;
+
             const response = await Cart.findByPk(id_cart)
+            if( Number(id_token) !== Number(response.fk_id_user)){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
 
             return res.json(response)
         } catch (error) {
@@ -90,12 +98,21 @@ module.exports = {
     get_all_user_cart: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
+            const id_token = req.token_decoded.id;
 
             const response = await Cart.findAndCountAll({
                 where:{fk_id_user:id_user},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
+
+            if( Number(id_token) !== Number(response.fk_id_user)){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
+
             return res.json(response)
         } catch (error) {
             const msg = {Error:'Erro ao tentar obter dados do servidor!'};
@@ -106,12 +123,21 @@ module.exports = {
     get_all_user_cart_pending: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
+            const id_token = req.token_decoded.id;
 
             const response = await Cart.findAndCountAll({
                 where:{fk_id_user:id_user, status:'pending'},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
+            
+            if( Number(id_token) !== Number(response.fk_id_user)){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
+                        
             return res.json(response)
         } catch (error) {
             const msg = {Error:'Erro ao tentar obter dados do servidor!'};
@@ -122,12 +148,21 @@ module.exports = {
     get_all_user_cart_approved: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
+            const id_token = req.token_decoded.id;
 
             const response = await Cart.findAndCountAll({
                 where:{fk_id_user:id_user, status:'approved'},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
+
+            if( Number(id_token) !== Number(response.fk_id_user)){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
+
             return res.json(response)
         } catch (error) {
             const msg = {Error:'Erro ao tentar obter dados do servidor!'};

@@ -6,15 +6,17 @@ const payment_controller = require('../controllers/payment_controller');
 
 //import middlewares
 const CountPages = require('../middlewares/count_pages');
+const auth = require('../middlewares/auth');
+const authManager = require('../middlewares/authManager');
 
 //crud cart
-router.get('/', CountPages, payment_controller.get);
-router.post('/', payment_controller.post);
-router.put('/', payment_controller.put);
-router.delete('/', payment_controller.delete);
+router.get('/', authManager, CountPages, payment_controller.get);
+router.post('/', authManager, payment_controller.post);
+router.put('/', authManager, payment_controller.put);
+router.delete('/', authManager, payment_controller.delete);
 
 //advance search
-router.get('/id', payment_controller.payment_id);
-router.get('/user', CountPages, payment_controller.payment_user);
+router.get('/id', auth, payment_controller.payment_id);
+router.get('/user', auth, CountPages, payment_controller.payment_user);
 
 module.exports = router

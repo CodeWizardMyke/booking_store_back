@@ -6,11 +6,13 @@ const token_invalid_controller = require('../controllers/token_invalid_controlle
 
 //import middlewares
 const CountPages = require('../middlewares/count_pages');
+const auth = require('../middlewares/auth');
+const authManager = require('../middlewares/authManager');
 
 //crud cart
-router.get('/', CountPages, token_invalid_controller.get);
-router.post('/', token_invalid_controller.post);
-router.delete('/', token_invalid_controller.delete);
+router.get('/', authManager, CountPages, token_invalid_controller.get);
+router.post('/', auth, token_invalid_controller.post);
+router.delete('/', authManager, token_invalid_controller.delete);
 
 
 module.exports = router

@@ -1,4 +1,4 @@
-const { Payment } = require('../database/models');
+const { Payment, Users } = require('../database/models');
 const PaymentNewItem = require('../functions/PaymentNewItem');
 
 module.exports = {
@@ -70,7 +70,16 @@ module.exports = {
     payment_id: async (req, res) => {
         try {
             const {id_payment} = req.headers;
+            console.log(id_payment)
+            const id_token = req.token_decoded.id;
+
             const response = await Payment.findByPk(id_payment)
+            if( Number(response.fk_id_user) !== Number(id_token) ){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
 
             return res.json(response)
         } catch (error) {
@@ -82,12 +91,20 @@ module.exports = {
     payment_user: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
+            const id_token = req.token_decoded.id;
 
             const response = await Payment.findAndCountAll({
                 where:{fk_id_user:id_user},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
+
+            if( Number(response.fk_id_user) !== Number(id_token)){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
 
             return res.json(response)
         } catch (error) {

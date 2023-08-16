@@ -68,7 +68,6 @@ module.exports = {
             if(req.body.password){
                 req.body.password = bcrypt.hashSync(req.body.password, 10)
             }
-            
             const {id_user} = req.headers;
             const userSearch = await Users.findByPk(id_user);
             await userSearch.update(req.body)
@@ -100,10 +99,18 @@ module.exports = {
     get_user_id: async (req, res) => {
         try {
             const {id_user} = req.headers;
+            const id_token = req.token_decoded.id;
+            
+            if( Number(id_user) !== Number(id_token)){
+                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
+                if(!isAdminAuth){
+                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                }
+            }
+            
+            const response = await Users.findByPk(id_user);
+            return res.json( response ) 
 
-            const userSearch = await Users.findByPk(id_user);
-
-            return res.json(userSearch)
         } catch (error) {
             const msg = {Error:'Erro ao tentar obter dados do servidor!'};
             console.log(error);
