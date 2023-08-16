@@ -13,7 +13,9 @@ module.exports = {
 
             return res.json(response)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     post: async (req, res) => {
@@ -30,7 +32,9 @@ module.exports = {
             const response = await Feedback.create(nData)
             return res.json(response)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     put: async (req, res) => {
@@ -48,7 +52,9 @@ module.exports = {
             return res.json(response)
 
         } catch (error) {
-            return res.json(error)
+            const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     delete: async (req, res) => {
@@ -60,7 +66,9 @@ module.exports = {
             return res.json(response)
    
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 
@@ -74,7 +82,9 @@ module.exports = {
             return res.json(response);
  
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     feedback_user: async (req, res) => {
@@ -89,7 +99,9 @@ module.exports = {
 
             return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 }

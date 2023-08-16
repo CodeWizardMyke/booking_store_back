@@ -3,84 +3,74 @@ const { Cart, Books} = require('../database/models');
 //import bibliotecas js
 const { validationResult } = require('express-validator');
 const CalculateCartPrice = require('../functions/CalculateCartPrice');
+const CartNewItem = require('../functions/CartNewItem');
 
 module.exports = {
-
     //crud model user information
     get: async (req, res) => {
         try {
             const {page, size} = req.headers;
 
-            const itemsCart = await Cart.findAndCountAll({
+            const response = await Cart.findAndCountAll({
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
 
-            return res.json(itemsCart)
+            return res.json(response)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     post: async (req, res) => {
         try {
-            const {id_user, id_books, qtd_items, type_selected, user_cpf} = req.headers
+            const bookResponse = await Books.findByPk(req.body.id_books);
 
-            const book = await Books.findByPk(id_books);
+            const cartItem = CartNewItem(req, bookResponse);
+            const itemCart = await Cart.create(cartItem);
 
-            //function para calcular os valores do livro referente ao tipo selecionado e quantidade
-            let {request_price, item_price} = CalculateCartPrice(book, type_selected, qtd_items);
-
-            let cartNewItem = {
-                item_price,
-                request_price,
-                status:'pending',
-                status_delivery:'',
-                qtd_items,
-                type_selected,
-                user_cpf: user_cpf ? user_cpf : '',
-                fk_id_books: id_books,
-                fk_id_user: id_user
-            }
-
-            const itemCart = await Cart.create(cartNewItem);
-
-            return res.json(itemCart)
+            return res.json(itemCart);
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     put: async (req, res) => {
         try {
-            const {id_cart, type_selected, qtd_items} = req.body;
+            const {type_selected, qtd_items} = req.body;
             
-            const itemCart = await Cart.findOne({where:{id_cart:id_cart}});
-            const book = await Books.findByPk(itemCart.fk_id_books);
+            const cartResponse = await Cart.findByPk(req.body.id_cart)
+            const bookResponse = await Books.findByPk(cartResponse.fk_id_books);
             
-            let {request_price, item_price} = CalculateCartPrice(book, type_selected, qtd_items);
+            const {request_price, item_price} = CalculateCartPrice(bookResponse, type_selected, qtd_items);
             
-            await itemCart.update({
-                request_price,
-                item_price,
+            await cartResponse.update({
+                request_price:request_price,
+                item_price:item_price,
                 qtd_items: Number(qtd_items),
-                type_selected
+                type_selected:type_selected
             })
-
-            return res.json(itemCart)
+            return res.json(cartResponse)
         } catch (error) {
-            return res.json(error)
+            const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     delete: async (req, res) => {
         try {
             const {id_cart} = req.headers;
 
-            const itemCart = await Cart.destroy({
+            const response = await Cart.destroy({
                 where:{id_cart:id_cart, status: 'pending'},
             })
-
-            return res.json(itemCart)
+            return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 
@@ -88,57 +78,61 @@ module.exports = {
     get_cart_by_id: async (req, res) => {
         try {
             const {id_cart} = req.headers;
+            const response = await Cart.findByPk(id_cart)
 
-            const itemCart = await Cart.findByPk(id_cart)
-
-            return res.json(itemCart)
+            return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     get_all_user_cart: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
 
-            const itemCart = await Cart.findAndCountAll({
+            const response = await Cart.findAndCountAll({
                 where:{fk_id_user:id_user},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
-
-            return res.json(itemCart)
+            return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     get_all_user_cart_pending: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
 
-            const itemCart = await Cart.findAndCountAll({
+            const response = await Cart.findAndCountAll({
                 where:{fk_id_user:id_user, status:'pending'},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
-
-            return res.json(itemCart)
+            return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     get_all_user_cart_approved: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
 
-            const itemCart = await Cart.findAndCountAll({
+            const response = await Cart.findAndCountAll({
                 where:{fk_id_user:id_user, status:'approved'},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
             })
-
-            return res.json(itemCart)
+            return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 }

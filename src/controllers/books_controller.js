@@ -9,21 +9,21 @@ const { validationResult }= require('express-validator');
 const deleteBookImage = require('../functions/deleteBookImage');
 
 module.exports = {
-
     //crud on model boooks
     get_books: async (req,res) => {
         try {
             const {page, size} = req.headers
 
-            const data = await Books.findAndCountAll({
+            const response = await Books.findAndCountAll({
                 where: {status:'active'},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1) )
             });
-
-            return res.send(data);
+            return res.json(response);
         } catch (error) {
-            res.send(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     post_book: async (req, res) => {
@@ -33,64 +33,56 @@ module.exports = {
                 req.file ? deleteBookImage(req.file.filename) : '';
                 return res.json(catchErrors)
             };
-
             req.body.front_cover = req.file.filename;
             req.body.status = 'active';
 
-            const insertBook = await Books.create(req.body);
-            res.send(insertBook);
-
+            const response = await Books.create(req.body);
+            res.json(response);
         } catch (error) {
-            res.send(error);
+            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     pull_book: async (req, res) => {
         try {
-            const {id_books} = req.headers;
-
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
                 //caso ocorra algum erro remova a imagem recebida e retorne os erros para o cliente
                 req.file ? deleteBookImage(req.file.filename) : '';
                 return res.json(catchErrors);
             };
-            
-            const book = await Books.findByPk(id_books);
+            const response = await Books.findByPk(req.body.id_books);
             
             //caso seja passado uma nova imagem como parâmetro remova a antiga deste produto
-            if(req.file && book){
-                deleteBookImage(book.front_cover)
+            if(req.file && response){
+                deleteBookImage(response.front_cover)
                 req.body.front_cover = req.file.filename;
             }
-            await book.update(req.body);
-            await book.save();
+            await response.update(req.body);
+            await response.save();
 
-            res.send(book)
+            res.json(response)
         } catch (error) {
-            res.send(error);
+            const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     delete_book: async (req, res) => {
         try {
-            // por questões de segurança de dados é importante não deletar completamente os produtos para não aconteçer errors na contabilidade assim optei por apenas desativar o produto.
-            const {id_books} = req.headers;
+            // por questões de segurança de dados é importante não deletar os produtos da aplicação
+            const {id_books, status} = req.body;
             
-            let book = await Books.findByPk(id_books);
-            let {status} = book;
-            
-            if(status == 'active'){
-                book.status = 'disabled';
-            }else{
-                book.status = 'active';
-            };
-            
-            await book.update();
-            await book.save();
+            const response = await Books.findByPk(id_books);
+            status ? response.status = status : '';
 
-            return res.send(book);
-
+            await response.save();
+            return res.json(response);
         } catch (error) {
-            return res.send(error);
+            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         };
     },
 
@@ -99,42 +91,48 @@ module.exports = {
         try {
             const {genre, page, size} = req.headers
     
-            const data = await Books.findAndCountAll({
+            const response = await Books.findAndCountAll({
                 where: {status:'active', genre:genre },
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1) )
             })
     
-            return res.send(data)
+            return res.json(response)
         } catch (error) {
-            res.send(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     get_id_book: async (req, res) => {
         try {
             const {id_books} = req.headers
 
-            const data = await Books.findByPk(Number(id_books))
+            const response = await Books.findByPk(Number(id_books))
 
-            return res.send(data)
+            return res.json(response)
 
         } catch (error) {
-            res.send(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     get_search_book: async (req, res) => {
         try {
             const {key, page, size} = req.headers
 
-            const data = await Books.findAndCountAll({
+            const response = await Books.findAndCountAll({
                 where: {status:'active', title:{[Op.like]: `%${key}%` }},
                 limit: Number(size),
                 offset: Math.ceil( Number(size) * ( Number(page) -1) )
             })
     
-            return res.send(data)
+            return res.json(response)
         } catch (error) {
-            res.send(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 };

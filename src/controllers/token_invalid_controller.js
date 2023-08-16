@@ -14,7 +14,9 @@ module.exports = {
 
             return res.json(response)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     post: async (req, res) => {
@@ -26,7 +28,9 @@ module.exports = {
             return res.send(response)
             
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     delete: async (req, res) => {
@@ -38,10 +42,11 @@ module.exports = {
                     createdAt:{ [Op.gt] : data} // Op.gt comparção de datas retorna a data igual ou maior
                 },
             })
-
             return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 }

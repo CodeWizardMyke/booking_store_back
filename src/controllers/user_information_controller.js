@@ -17,7 +17,9 @@ module.exports = {
 
             return res.json(data)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     post_user_information: async (req, res) => {
@@ -34,7 +36,9 @@ module.exports = {
 
             return res.json(insertUser)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     put_user_information: async (req, res) => {
@@ -51,7 +55,9 @@ module.exports = {
 
             return res.json(req.body)
         } catch (error) {
-            return res.json(error)
+            const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     delete_user_information: async (req, res) => {
@@ -62,7 +68,9 @@ module.exports = {
 
             return res.json(dataDeleted)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 
@@ -75,7 +83,9 @@ module.exports = {
 
             return res.json(userSearch)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 }

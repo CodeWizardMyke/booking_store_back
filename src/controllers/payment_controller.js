@@ -1,4 +1,5 @@
-const { Payment, Cart, Books } = require('../database/models');
+const { Payment } = require('../database/models');
+const PaymentNewItem = require('../functions/PaymentNewItem');
 
 module.exports = {
     //crud model user information
@@ -13,71 +14,55 @@ module.exports = {
 
             return res.json(response)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     post: async (req, res) => {
         try {
-            const {id_cart, payment_id, payment_type, merchant_order_id, status} = req.headers;
+            //função para criar um objeto item com estruturas predefinidas externalizada para a função PaymentNewItem: 
+            //Função PaymentNewItem é asyncrona recebe req, e retorna um objeto no formato do modelo Payment:
+            const paymentItem = await PaymentNewItem(req);
 
-            // os dados req.headers payment_id entre outros serão obtidos apartir do consumo da api do "mercado pago api" 
-            // no seu app front end repase os dados retornados da api para a nossa pelo req.headers
-
-            const responseCart = await Cart.findByPk( id_cart );
-            const responseBooks = await Books.findByPk( userCart.fk_id_books );
-            if(responseBooks.inventory >= responseCart.qtd_items){
-                responseBooks.inventory -= responseCart.qtd_items;
-            }
-           
-            const paymentItem ={
-                api_payment_id: payment_id,
-                api_mechant_order: merchant_order_id,
-                api_payment_type: payment_type,
-                fk_id_user: responseCart.fk_id_user,
-                fk_id_cart: responseCart.id_cart,
-                status: status,
-                price: responseCart.request_price,
-            }
-            const paymentCreated = await Payment.create(paymentItem)
-
-            responseCart.status = status
-            await responseCart.save()
-            await responseBooks.save()
-           
-            return res.send(paymentCreated)
-            
+            const response = await Payment.create(paymentItem)
+            return res.json(response)
         } catch (error) {
-            res.json(error)
+            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     put: async (req, res) => {
         try {
-            const { payment_id, payment_type,  status} = req.headers;
-
-            const response = await Payment.findOne({where:{api_payment_id:payment_id}});
-            response.api_payment_id = payment_id
+            const { payment_id, payment_type,  status} = req.body;
+            const response = await Payment.findByPk(payment_id);
+            
             response.api_payment_type = payment_type
             response.status = status
 
-            const paymentUpdated = await response.save()
-           
-            return res.send(paymentUpdated)
-
+            await response.save()
+            return res.json(response)
         } catch (error) {
-            return res.json(error)
+            const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     delete: async (req, res) => {
         try {
-            const {id_payment} = req.headers;
+            const {id_payment} = req.headers
 
             const response = await Payment.destroy({
-                where:{id_payment:id_payment, status: 'pending'},
+                where:{ 
+                    id_payment: id_payment,
+                    status: 'pending'},
             })
-
             return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 
@@ -85,12 +70,13 @@ module.exports = {
     payment_id: async (req, res) => {
         try {
             const {id_payment} = req.headers;
-
             const response = await Payment.findByPk(id_payment)
 
             return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
     payment_user: async (req, res) => {
@@ -105,7 +91,9 @@ module.exports = {
 
             return res.json(response)
         } catch (error) {
-            res.json(error);
+            const msg = {Error:'Erro ao tentar obter dados do servidor!'};
+            console.log(error);
+            res.status(500).json(msg);
         }
     },
 }
