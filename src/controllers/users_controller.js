@@ -65,11 +65,12 @@ module.exports = {
             
             delete req.body.re_email;
             delete req.body.re_password;
+
             if(req.body.password){
                 req.body.password = bcrypt.hashSync(req.body.password, 10)
             }
-            const {id_user} = req.headers;
-            const userSearch = await Users.findByPk(id_user);
+            const {id} = req.token_decoded;
+            const userSearch = await Users.findByPk(id);
             await userSearch.update(req.body)
 
             return res.json(req.body)
@@ -81,12 +82,11 @@ module.exports = {
     },
     delete_user: async (req, res) => {
         try {
-            const {id_user} = req.headers;
+            const {id_user, status} = req.body;
 
             const userSearch = await Users.findByPk(id_user);
-            userSearch.status = 'disabled';
 
-            await userSearch.update()
+            await userSearch.update({status:status})
             return res.json(userSearch)
         } catch (error) {
             const msg = {Error:'Erro ao tentar deletar dados do servidor!'};
@@ -100,6 +100,8 @@ module.exports = {
         try {
             const {id_user} = req.headers;
             const id_token = req.token_decoded.id;
+
+            console.log(req.tok)
             
             if( Number(id_user) !== Number(id_token)){
                 const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})

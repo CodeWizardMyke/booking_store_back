@@ -24,13 +24,13 @@ module.exports = {
     },
     post_user_information: async (req, res) => {
         try {
-            const {id_user} = req.headers
+            const {id} = req.token_decoded
 
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
                 return res.json(catchErrors)
             }
-            req.body.fk_id_user = id_user
+            req.body.fk_id_user = id
 
             const insertUser = await User_information.create(req.body);
 
@@ -43,17 +43,17 @@ module.exports = {
     },
     put_user_information: async (req, res) => {
         try {
-            const {id_user} = req.headers;
+            const {id} = req.token_decoded;
 
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
                 return res.json(catchErrors)
             }
             
-            const userSearch = await User_information.findOne({where:{fk_id_user:id_user}});
+            const userSearch = await User_information.findOne({where:{fk_id_user:id}});
             await userSearch.update(req.body)
 
-            return res.json(req.body)
+            return res.json(userSearch)
         } catch (error) {
             const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};
             console.log(error);
@@ -62,9 +62,8 @@ module.exports = {
     },
     delete_user_information: async (req, res) => {
         try {
-            const {id_user} = req.headers;
-
-            const dataDeleted = await User_information.destroy({where:{fk_id_user:id_user}})
+            const {id} = req.token_decoded;
+            const dataDeleted = await User_information.destroy({where:{fk_id_user:id}})
 
             return res.json(dataDeleted)
         } catch (error) {

@@ -1,6 +1,8 @@
 const { Payment, Users } = require('../database/models');
 const PaymentNewItem = require('../functions/PaymentNewItem');
 
+const {validationResult} = require('express-validator')
+
 module.exports = {
     //crud model user information
     get: async (req, res) => {
@@ -23,15 +25,12 @@ module.exports = {
         try {
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
-                req.file ? deleteBookImage(req.file.filename) : '';
                 return res.json(catchErrors)
             };
-            
-            //função para criar um objeto item com estruturas predefinidas externalizada para a função PaymentNewItem: 
-            //Função PaymentNewItem é asyncrona recebe req, e retorna um objeto no formato do modelo Payment:
-            const paymentItem = await PaymentNewItem(req);
 
+            const paymentItem = await PaymentNewItem(req);
             const response = await Payment.create(paymentItem)
+
             return res.json(response)
         } catch (error) {
             const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
@@ -43,17 +42,15 @@ module.exports = {
         try {
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
-                req.file ? deleteBookImage(req.file.filename) : '';
                 return res.json(catchErrors)
             };
 
-            const { payment_id, payment_type,  status} = req.body;
+            const {payment_id} = req.body
             const response = await Payment.findByPk(payment_id);
-            
-            response.api_payment_type = payment_type
-            response.status = status
 
+            await response.update(req.body)
             await response.save()
+
             return res.json(response)
         } catch (error) {
             const msg = {Error:'Erro ao tentar atualizar dados do servidor!'};

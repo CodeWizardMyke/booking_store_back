@@ -16,11 +16,13 @@ const auth = async (req, res, next) => {
     if(tokenBlackList){
         return res.status(401).json({msg:'token inválido!'})
     }
-
+    
     try {
         const secret = process.env.JWT_KEY
         jwt.verify(token, secret, (error, decoded) => {
-            if(error){return res.status(401).json({msg:'Acesso negado!'}) };
+            if(error){
+                return res.status(401).json({msg:'Acesso negado!'})
+            };
             req.token_decoded = decoded 
         })
 

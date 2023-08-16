@@ -12,7 +12,7 @@ const validator_fields_payment = require('../functions/validator_fields_payment'
 
 //crud cart
 router.get('/', authManager, CountPages, payment_controller.get);
-router.post('/', authManager, validator_fields_payment.post, payment_controller.post);
+router.post('/', auth, validator_fields_payment.post, payment_controller.post);
 router.put('/', authManager, validator_fields_payment.put, payment_controller.put);
 router.delete('/', authManager, payment_controller.delete);
 

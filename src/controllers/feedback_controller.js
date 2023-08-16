@@ -1,4 +1,5 @@
 const { Feedback } = require('../database/models');
+const {validationResult} = require('express-validator')
 
 module.exports = {
     //crud model user information
@@ -22,20 +23,13 @@ module.exports = {
         try {
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
-                req.file ? deleteBookImage(req.file.filename) : '';
                 return res.json(catchErrors)
             };
+            req.body.fk_id_user = req.token_decoded.id ? req.token_decoded.id : null ;
+            req.body.status = 'pending';
 
-            const {fk_id_user, subject, msg} = req.body;
+            const response = await Feedback.create( req.body)
 
-            const nData = {
-                subject: subject,
-                msg: msg,
-                status: 'pending',
-                fk_id_user: fk_id_user ? fk_id_user : null
-            }
-
-            const response = await Feedback.create(nData)
             return res.json(response)
         } catch (error) {
             const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
@@ -47,20 +41,13 @@ module.exports = {
         try {
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
-                req.file ? deleteBookImage(req.file.filename) : '';
                 return res.json(catchErrors)
             };
             
-            const {id_feedback, subject, msg, fk_id_user} = req.body
+            const feedbackSearch = await Feedback.findByPk(req.body.id_feedback)
 
-            const feedbackSearch = await Feedback.findByPk(id_feedback)
-
-            subject ? feedbackSearch.subject = subject : '';
-            msg ? feedbackSearch.msg = msg : '';
-            fk_id_user ? feedbackSearch.fk_id_user = fk_id_user: '';
-            feedbackSearch.status = 'peding';
-
-            const response = await feedbackSearch.save()
+            const response = await feedbackSearch.update(req.body)
+            await feedbackSearch.save()
             return res.json(response)
 
         } catch (error) {

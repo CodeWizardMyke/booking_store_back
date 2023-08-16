@@ -4,7 +4,7 @@ const validator_fields_feedback = {
     post : [
         check('subject').notEmpty().withMessage('*Ititulo inválido').bail(),
         check('msg').notEmpty().withMessage('*Mensagem inválida').bail(),
-        check('fk_id_user').optional.notEmpty().withMessage('*Id inválido').bail(),
+        check('fk_id_user').optional().notEmpty().withMessage('*Id inválido').bail(),
     ],
     put : [
         check('subject').optional().notEmpty().withMessage('*titulo inválido').bail(),
