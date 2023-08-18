@@ -36,6 +36,12 @@ module.exports = {
                 return res.json(catchErrors)
             }
 
+            const emailExists = await Users.findAll({where:{email:req.body.email}})
+            if(emailExists.length){
+                req.file ? deleteUsersImage(req.file.filename) : '';
+                return res.status(409).json({error:{email:'email já cadastrado no sistema'}});
+            };
+
             req.file ?  req.body.user_avatar = req.file.filename : req.body.user_avatar = 'default.jpg';
             req.body.status = 'active';
             req.body.admin = 'false';
@@ -56,11 +62,16 @@ module.exports = {
                 req.file ? deleteUsersImage(req.file.filename) : '';
                 return res.json(catchErrors)
             }
-            
+
             const emailExists = await Users.findAll({where:{email:req.body.email}})
             if(emailExists.length){
                 req.file ? deleteUsersImage(req.file.filename) : '';
-                return res.json({error:{email:'email já cadastrado no sistema'}});
+                return res.status(409).json({error:{email:'email já cadastrado no sistema'}});
+            };
+            
+            const {id} = req.token_decoded;
+            if(!id){
+                return res.status(500).json({msg:'Erro na tentativa de obter dados do usuário!'})
             }
             
             delete req.body.re_email;
@@ -69,7 +80,6 @@ module.exports = {
             if(req.body.password){
                 req.body.password = bcrypt.hashSync(req.body.password, 10)
             }
-            const {id} = req.token_decoded;
             const userSearch = await Users.findByPk(id);
             await userSearch.update(req.body)
 
@@ -106,7 +116,7 @@ module.exports = {
             if( Number(id_user) !== Number(id_token)){
                 const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
                 if(!isAdminAuth){
-                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
+                    return res.status(401).json({msg:'Autorização negada! dados incorretos'})
                 }
             }
             

@@ -24,9 +24,8 @@ const auth = async (req, res, next) => {
                 return res.status(401).json({msg:'Acesso negado!'})
             };
             req.token_decoded = decoded 
+            next();
         })
-
-        next();
     } catch (error) {
         res.status(400).json({msg:'Token inválido!'})
     }
