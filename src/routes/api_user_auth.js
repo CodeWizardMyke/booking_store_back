@@ -4,7 +4,9 @@ const router = express.Router();
 const user_login_controller = require('../controllers/users_login_controller');
 
 const validator_fields_user_login = require('../functions/validator_fields_user_login');
+const auth = require('../middlewares/auth')
 
 router.get('/', validator_fields_user_login, user_login_controller.login_user);
+router.get('/logout', auth, validator_fields_user_login, user_login_controller.logout);
 
 module.exports = router;
