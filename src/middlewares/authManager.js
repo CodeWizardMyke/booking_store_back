@@ -18,15 +18,21 @@ const authManager = async (req, res, next) => {
     try {
         const secret = process.env.JWT_KEY
         jwt.verify(token, secret, async (error, decoded) => {
-            if(error){return res.status(401).json({msg:'Acesso negado!'}) };
-            const {id} = decoded;
-            
-            const userAuthorization = await Users.findOne({where:{ id_user:id, admin:'true' }})
-            if(!userAuthorization){
-                return res.status(401).json({msg:'Não autorizado'})
+            if (error) {
+                return res.status(401).json({ msg: 'Acesso negado!' });
             }
+    
+            const { id } = decoded;
+    
+            const userAuthorization = await Users.findOne({ where: { id_user: id, admin: 'true' } });
+    
+            if (!userAuthorization) {
+                return res.status(401).json({ msg: 'Solicitação inválida' });
+            }
+    
+            next(); // Move o next() para dentro do bloco de sucesso da autorização
+        
         });
-        next();
     } catch (error) {
         res.status(400).json({msg:'Token inválido!'})
     }
