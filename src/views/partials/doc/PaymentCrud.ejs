@@ -1,0 +1,139 @@
+<div class="row">
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET Payment</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/payment</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "GET",
+        "Authorization": {token},
+        "Content-Type": 'application/json',
+        "page": 1,
+        "size": 50,
+    }
+</pre>
+                    <div>
+                        <p>page: opção para definir a paginação</p>
+                        <p>size: opção para delimitar quantidade de elementos retornados</p>
+                        <p>Para esta funcionalidade é necessário um token com autorização de administrador</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">POST Payment</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/payment</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'application/json',
+        "Authorization": {token},
+    }
+</pre>
+                    <div>
+                        <p>Esperado um token válido para adicionar um novo pagamento</p>
+                    </div>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "id_cart": 519,
+        "payment_id": 123874,
+        "merchant_order_id": 38576984322132456876,
+        "payment_type": "credit-card",
+        "status": "approved"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                        <p>Haverá uma validação por parte do backend para os casos de divergência de dados</p>
+                        <p>Os dados poderão ser obtidos através de uma outra API gratuita "Mercado Pago", ela será responsável por processar os pagamentos dos clientes</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">PUT Payment</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/payment</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "PUT",
+        "Authorization": {token},
+        "Content-Type": 'application/json',
+    }
+</pre>
+                    <div>
+                        <p>Esperado um token válido para atualizar um pagamento existente</p>
+                    </div>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "payment_id": 39,
+        "api_payment_type": "credit-card",
+        "status": "approved"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                        <p>Haverá uma validação por parte do backend para os casos de divergência de dados</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">DELETE Payment</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/payment</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "DELETE",
+        "Authorization": {token},
+        "Content-Type": 'application/json',
+        "id_payment": 15,
+    }
+</pre>
+                    <div>
+                        <p>Esperado um token válido para esta ação</p>
+                        <p>Para excluir um pagamento do banco de dados, só ocorrerá se o pagamento estiver pendente; caso contrário, a exclusão será ignorada</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

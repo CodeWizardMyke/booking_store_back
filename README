@@ -1,1 +1,7 @@
 rotas de usuarios testada e adicionado codigos https
+
+
+A ser implementado a API
+    -exclusão de usuarios- se nao houver compras exclua dados de informação primeiro e apos exclua o usuario em simples
+    -VALIDAÇÃO ao criar um produto não deixar o formato .gif ser válido
+    -VALIDAÇÃO ao criar um carrinho de produtos validar o campo kindle common e special e processar se são iguais os esperados pelo back end

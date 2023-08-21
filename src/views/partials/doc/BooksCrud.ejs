@@ -1,0 +1,153 @@
+<div class="row">
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET Books</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/books</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "GET",
+        page: 1,
+        size: 50
+    }
+</pre>
+                    <div>
+                        <p>page: opção para definir a paginação</p>
+                        <p>size: opção para delimitar quantidade de elementos retornados</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">POST Books</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/books</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Authorization": {token},
+        "Content-type": 'multipart/form-data'
+    }
+</pre>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        title:
+        author:
+        publishing_company:
+        edition:
+        status:
+        synopsis:
+        genre:
+        kindle_price:
+        common_price:
+        special_price:
+        publication_date:
+        dimensions:
+        number_pages:
+        inventory:
+        language:
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Para autorização de inserção de dados é necessário ter acesso como administrador</p>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                        <p>Formatos de imagens suportados .jpg ou .png</p>
+                        <p>Nos campos de preço, é esperado que ao menos um seja preenchido</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">PUT Books</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/books</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "PUT",
+        "Authorization": {token},
+        "Content-type": 'multipart/form-data'
+    }
+</pre>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        title:
+        author:
+        publishing_company:
+        edition:
+        status:
+        synopsis:
+        genre:
+        kindle_price:
+        common_price:
+        special_price:
+        publication_date:
+        dimensions:
+        number_pages:
+        inventory:
+        language:
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Para autorização de inserção de dados é necessário ter acesso como administrador</p>
+                        <p>Os campos vazios serão ignorados pela API e apenas os que forem preenchidos serão atualizados</p>
+                        <p>Formatos de imagens suportados .jpg ou .png</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">DELETE Books</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/books</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "DELETE",
+        Authorization: {token},
+        id_books: 15
+    }
+</pre>
+                    <div>
+                        <p>É esperado um token com a permissão de administrador</p>
+                        <p>O ID do produto a ser desativado deve ser passado pelo header da solicitação como id_books</p>
+                        <p>Por questões de segurança de dados, a função para deletar o produto não foi implementada</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

@@ -1,0 +1,20 @@
+.documents_style pre{
+    background-color: rgb(206, 206, 206);
+    border-radius: 5px;
+    border: 2px solid slateblue;
+    padding: 5px;
+}
+.documents_style{
+    margin-top: 15rem;
+    padding: 10px;
+}
+.documents_style article{
+    margin-bottom: 25px;
+    border: rgba(105, 90, 205, 0.66) solid 2px;
+    padding: 15px;
+    background-color: antiquewhite;
+    border-radius: 5px;
+}   
+.documents_style section{
+    margin: auto;
+}

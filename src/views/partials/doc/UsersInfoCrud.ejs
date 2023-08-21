@@ -1,0 +1,149 @@
+<div class="row">
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET Users Information</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users/information</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "GET",
+        Authorization: token,
+        "Content-Type": 'application/json',
+        page: 1,
+        size: 50,
+    }
+</pre>
+                    <div>
+                        <p>page: opção para definir a paginação</p>
+                        <p>size: opção para delimitar quantidade de elementos retornados</p>
+                        <p>Para esta funcionalidade é necessário um token com autorização de administrador</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">POST Users Information</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users/information</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'application/json',
+        "Authorization": {token},
+    }
+</pre>
+
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "full_name": "jao pedro silva",
+        "email": "joaopedro@email.com",
+        "telephone": "9789657025",
+        "birth_date": "16/08/2002",
+        "user_cpf": "46635220502",
+        "user_rg": "95865480x",
+        "state": "PI",
+        "city": "São Paulo",
+        "cep": "03698172",
+        "district": "SP",
+        "road": "alguma rua ai",
+        "number": "256",
+        "complements": "rua tal de frente tal casa 25"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                        <p>Haverá uma validação por parte do backend para os casos de divergência de dados</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">PUT Users Information</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users/information</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "PUT",
+        "Authorization": {token},
+        "Content-Type": 'application/json'
+    }
+</pre>
+                    <div>
+                        <p>Acesso permitido apenas ao proprietário da conta, ou ao administrador do site.</p>
+                    </div>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "full_name": "jao pedro silva",
+        "email": "joaopedro@email.com",
+        "telephone": "9789657025",
+        "birth_date": "16/08/2002",
+        "user_cpf": "46635220502",
+        "user_rg": "95865480x",
+        "state": "PI",
+        "city": "São Paulo",
+        "cep": "03698172",
+        "district": "SP",
+        "road": "alguma rua ai",
+        "number": "256",
+        "complements": "rua tal de frente tal casa 25"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Todos os campos para a atualização são configurados como opcionais</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">DELETE Users Information</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users/information</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "DELETE",
+        Authorization: {token},
+    }
+</pre>
+                    <div>
+                        <p>Para a solicitação ser feita com sucesso, apenas o token é esperado</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

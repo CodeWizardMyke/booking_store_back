@@ -1,0 +1,140 @@
+<div class="row">
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET Users</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "GET",
+        Authorization: token,
+        page: 1,
+        size: 50,
+    }
+</pre>
+                    <div>
+                        <p>page: opção para definir a paginação</p>
+                        <p>size: opção para delimitar quantidade de elementos retornados</p>
+                        <p>Para esta funcionalidade é necessário um token com autorização de administrador</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">POST Users</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data'
+    }
+</pre>
+
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "email": "usernotadm@email.com",
+        "re_email": "usernotadm@email.com",
+        "password": "teste123",
+        "re_password": "teste123",
+        "username": "usuário teste",
+        "status": "active",
+        "user_avatar": "imagem.png"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                        <p>Haverá uma validação por parte do backend para os casos de divergência de dados</p>
+                        <p>Imagem de usuário é opcional; formatos de imagens suportados: .jpg, .png, .gif</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">PUT Users</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "PUT",
+        "Authorization": {token},
+        "Content-Type": 'multipart/form-data'
+    }
+</pre>
+                    <div>
+                        <p>Acesso permitido apenas ao proprietário da conta, ou ao administrador do site.</p>
+                    </div>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "email": "usernotadm@email.com",
+        "re_email": "usernotadm@email.com",
+        "password": "teste123",
+        "re_password": "teste123",
+        "username": "usuário teste",
+        "status": "active",
+        "user_avatar": "imagem.png"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                        <p>Haverá uma validação por parte do backend para os casos de divergência de dados</p>
+                        <p>Imagem de usuário é opcional; formatos de imagens suportados: .jpg, .png, .gif</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">DELETE Users</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "DELETE",
+        Authorization: {token},
+        id_users: 15
+    }
+</pre>
+                    <div>
+                        <p>É esperado um token com a permissão de administrador ou ser proprietário da conta</p>
+                        <p>Para ser feita a exclusão de dados de um usuário antes deve ser feita a exclusão das informações do mesmo, e não ter efetuado nenhuma compra no site</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

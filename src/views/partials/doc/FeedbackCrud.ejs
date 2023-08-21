@@ -1,0 +1,129 @@
+<div class="row">
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET Feedback</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/feedback</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "GET",
+        "Authorization": {token},
+        "page": 1,
+        "size": 50,
+    }
+</pre>
+                    <div>
+                        <p>page: opção para definir a paginação</p>
+                        <p>size: opção para delimitar quantidade de elementos retornados</p>
+                        <p>Para esta funcionalidade é necessário um token com autorização de administrador</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">POST Feedback</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/feedback</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'application/json',
+    }
+</pre>
+
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "subject": "Digite aqui o resumo do seu ticket de suporte",
+        "msg": "Aqui a mensagem, o problema que ocorreu com a solicitação..."
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>Cada um dos campos precisa ser preenchido para que a solicitação ocorra com sucesso</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">PUT Feedback</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/feedback</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "PUT",
+        "Authorization": {token},
+        "Content-Type": "application/json",
+    }
+</pre>
+                    <div>
+                        <p>Acesso permitido apenas ao proprietário da conta, ou ao administrador do site.</p>
+                    </div>
+                    <div>
+                        <h4>Body da requisição</h4>
+<pre>
+    body = {
+        "id_feedback": 37,
+        "subject": "atualizando o título",
+        "msg": "novo texto do feedback atualizado"
+    }
+</pre>
+                    </div>
+                    <div>
+                        <p>para atualizar o feedback deve-se passar o id</p>
+                        <p>os campos para a atualização serão opcionais, caso não haja modificação o pedido será negado</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">DELETE Feedback</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/feedback</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "DELETE",
+        "Authorization": {token},
+        "Content-Type": "application/json",
+        "id_feedback": 15,
+    }
+</pre>
+                    <div>
+                        <p>É esperado um token com a permissão de administrador ou ser proprietário de uma conta</p>
+                        <p>o feedback será excluído após a solicitação</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
