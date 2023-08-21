@@ -16,7 +16,6 @@ h1,h2,h3,h4{
   color: var(--font-title)!important;
 }
 
-
 /*formatação do header da página*/
 .nav-header{
   display:flex;
@@ -47,9 +46,37 @@ h1,h2,h3,h4{
 }
 
 /*formatação do texto dos articles*/
+.parallax {
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/images/bg/bg-1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.parallax-content{
+  margin: 1rem auto;
+  background-color: #ffffffb1;
+  padding: 15px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.section-content{
+  background-color: rgba(255, 255, 255, 0.87);
+  padding: 5px;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
 .content-article{
-  background-color: #f6f4f4e4;
-  box-shadow: 0 0 15px #8f8f8f;
+  box-shadow: 0 0 15px #cbcbcb;
   text-align: justify;
   border-radius: 10px;
   padding: 5px;
@@ -126,14 +153,14 @@ h1,h2,h3,h4{
 /*float button*/
 .floating-button {
   position: fixed;
-  right: 50px;
+  right: 15px;
   top: 94%;
   transform: translateY(-50%);
   cursor: pointer;
-  width: 35px;
+  width: 100px;
   height: 35px;
   background-color: rgba(255, 214, 92, 0.394);
-  border-radius: 100%;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,6 +169,5 @@ h1,h2,h3,h4{
   padding: 5px;
 }
 .floating-button:hover{
-  box-shadow: 0 0 15px #070707;
   background-color: rgba(216, 176, 55, 0.8);
 }

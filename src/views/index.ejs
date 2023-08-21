@@ -2,25 +2,23 @@
 <html lang="pt-br">
 <%- include('partials/components/head') %>
 <body>
-  <%- include('partials/components/header') %>
-    <main class="container">
-      <section>
-        <article class="content-article parallax-layer layer-1">
-              <div class="mb-5 mt-5">
+  <main>
+      <%- include('partials/components/header') %>
+      <section class="parallax">
+          <article class="container parallax-content">
                 <h1>BOOK STORE</h1>
-              </div>
-              <h4>Plataforma API: Desenvolvendo o Futuro da Integração e Automação</h4>
-              <p class="text-width">
-                  Nossa API foi meticulosamente projetada para proporcionar uma experiência fluida e eficiente, abrangendo várias
-                  áreas-chave de nossa plataforma. Seja você um desenvolvedor experiente ou alguém que está explorando a programação pela primeira vez,
-                  nossa API foi criada com a usabilidade em mente, oferecendo endpoints intuitivos e documentação detalhada para garantir uma integração
-                  bem-sucedida.
-              </p>
-        </article>
+                <h4>Plataforma API: Desenvolvendo o Futuro da Integração e Automação</h4>
+                <p class="text-width">
+                    Nossa API foi meticulosamente projetada para proporcionar uma experiência fluida e eficiente, abrangendo várias
+                    áreas-chave de nossa plataforma. Seja você um desenvolvedor experiente ou alguém que está explorando a programação pela primeira vez,
+                    nossa API foi criada com a usabilidade em mente, oferecendo endpoints intuitivos e documentação detalhada para garantir uma integração
+                    bem-sucedida.
+                </p>
+          </article>
       </section >
       
-      <section class="parallax">
-          <article class="container">
+      <section class="section-content container">
+          <article class="">
             <div class="content-article">
               <h2 class="mb-4">Documentação</h2>
               <div class="row doc-list ">
@@ -76,8 +74,8 @@
       <!-- documentação completa da api, sua visualização será feita atravez do click do usuário -->
       
       <!-- fim da documentação-->
-      <div class="floating-button">Up</div>
+      <div class="floating-button">Menu Doc</div>
+      <%- include('partials/components/footer') %>
     </main>
-    <%- include('partials/components/footer') %>
 </body>
 </html>

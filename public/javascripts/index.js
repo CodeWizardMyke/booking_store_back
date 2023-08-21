@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#nav-to-doc').addEventListener('click', ()=>{
         menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
     })
-  
+
     const buttonsCrudDoc = document.querySelectorAll('#list-crud li')
 
     for(let i in buttonsCrudDoc){
