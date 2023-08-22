@@ -1,0 +1,81 @@
+<div class="row">
+    <section class="col-md-8">
+        <h2>Books advance search</h2>
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET books genres</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/books/genre<pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "GET",
+        Authorization: token,
+        page: 1,
+        genre: 'novel',
+    }
+</pre>
+                    <div>
+                        <p>genre: string com o nome do genero da busca</p>
+                        <p>page: opção para definir a paginação</p>
+                        <p>size: opção para delimitar quantidade de elementos retornados</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET id books</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/books/id</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data',
+        "id_books": 15,
+    }
+</pre>
+                <div>
+                    <p>id_books: um number que se refere ao id do produtos a ser pesquisado</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET Book title</h2>
+            <p>Com base na key informada no header da solicitação retornará todos produtos com titulo igual ou parecido com a key</p>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/books/searchpre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "PUT",
+        "Authorization": {token},
+        "Content-Type": 'multipart/form-data',
+        "key": "traz"
+    }
+</pre>
+                    <div>
+                        <p>key: uma string contendo palavras de pesquisas de titulos dos produtos</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

@@ -1,16 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const floatingButton = document.querySelector(".floating-button");
-    const menuNav = document.querySelector('.doc-list')
 
-    floatingButton.addEventListener("click", function () {
-        menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-
-    document.querySelector('#nav-to-doc').addEventListener('click', ()=>{
-        menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
-    })
-
-    const buttonsCrudDoc = document.querySelectorAll('#list-crud li')
+    const buttonsCrudDoc = document.querySelectorAll('#list-doc li')
 
     for(let i in buttonsCrudDoc){
         const id = buttonsCrudDoc[i].id != undefined ? `#${buttonsCrudDoc[i].id}` : false;
@@ -60,4 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+    /*funções para estilizção*/
+    const floatingButton = document.querySelector(".floating-button");
+    const menuNav = document.querySelector('.doc-list')
+
+    floatingButton.addEventListener("click", function () {
+        menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    document.querySelector('#nav-to-doc').addEventListener('click', ()=>{
+        menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
+    })
+
 })

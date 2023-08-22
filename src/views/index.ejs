@@ -25,7 +25,7 @@
     
                   <div class="col-md-4">
                       <h2>Crud</h2>
-                      <ul id="list-crud">
+                      <ul id="list-doc">
                           <li id="crudbooks">Books</li>
                           <li id="crudusers">Users</li>
                           <li id="cruduserinfo">User Information</li>
@@ -37,19 +37,19 @@
     
                   <div class="col-md-4">
                       <h2>Advance Search</h2>
-                      <ul>
-                          <li>Books</li>
-                          <li>Users</li>
-                          <li>Payment</li>
-                          <li>Feedback</li>
+                      <ul id="list-doc">
+                          <li id="serachBooks">Books</li>
+                          <li id="searchUsers">Users</li>
+                          <li id="searchPayment">Payment</li>
+                          <li id="searchFeedback">Feedback</li>
                       </ul>
                   </div>
     
                   <div class="col-md-4">
                     <h2>Auth</h2>
-                    <ul>
-                        <li>Auth</li>
-                        <li>Token invalid</li>
+                    <ul id="list-doc">
+                        <li id="auth">Auth</li>
+                        <li id="token">Token invalid</li>
                     </ul>
                   </div>
     
@@ -60,12 +60,20 @@
           <div class="bg-doc">
             <article class="container">
               <div class="documents_style" id="doc-select">
+
+                <!-- CRUD DOCUMENTATION START-->
                 <div id="crudbooks-doc" class="display-off"><%- include('partials/doc/BooksCrud') %></div>
                 <div id="crudusers-doc" class="display-off" ><%- include('partials/doc/UsersCrud') %></div>
                 <div id="cruduserinfo-doc" class="display-off" ><%- include('partials/doc/UsersInfoCrud') %></div>
                 <div id="crudcart-doc" class="display-off" ><%- include('partials/doc/CartCrud') %></div>
                 <div id="crudpay-doc" class="display-off" ><%- include('partials/doc/PaymentCrud') %></div>
                 <div id="crudfb-doc" class="display-off" ><%- include('partials/doc/FeedbackCrud') %></div>
+                <!-- CRUD DOCUMENTATION END-->
+
+                <!-- SEARCH DOCUMENTATION START-->
+                <div id="serachBooks-doc" class="display-off" ><%- include('partials/doc/BooksSearch') %></div>
+                <!-- SEARCH DOCUMENTATION END-->
+
               </div>
             </article>
           </div>
