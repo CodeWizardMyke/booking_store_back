@@ -1,0 +1,105 @@
+<div class="row">
+    <section class="col-md-8">
+        <h2>Advance cart search</h2>
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET cart search</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/cart/id<pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "GET",
+        "Authorization": {token},
+        "id_cart": 520,
+    }
+</pre>
+                    <div>
+                        <p>id_cart: id passado se refere ao carrinho do usuário e deve ser passado como parâmetro da requisição</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET all pending user's cart</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/cart/pending</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data',
+        "Authorization": {token}
+        "id_user": 60,
+    }
+</pre>
+                <div>
+                    <p>id_user: deve ser passado como parâmetro da requisição o id do usuario</p>
+                    <p>Essa pesquisa retornará todos carrinhos do usuário que ainda não foi realizado o pagamento</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET all approved user's cart</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/cart/approved</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data',
+        "Authorization": {token}
+        "id_user": 60,
+    }
+</pre>
+                <div>
+                    <p>id_user: deve ser passado como parâmetro da requisição o id do usuário</p>
+                    <p>Essa pesquisa retornará todos carrinhos do usuário que o pagamento foi realizado</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET all user's cart</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/cart/user</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data',
+        "Authorization": {token}
+        "id_user": 60,
+    }
+</pre>
+                <div>
+                    <p>id_user: deve ser passado como parâmetro da requisição o id do usuario</p>
+                    <p>Essa pesquisa retornará todos carrinhos do usuário independente do status de pagamento</p>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

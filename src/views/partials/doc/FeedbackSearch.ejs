@@ -1,0 +1,54 @@
+<div class="row">
+    <section class="col-md-8">
+        <h2>Advance feedback search</h2>
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET feedback id</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/feedback/id</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "GET",
+        "Authorization": {token},
+        "id_feedback": 10,
+    }
+</pre>
+                    <div>
+                        <p>id_feedback: id da mensagem de feedback deve ser passado como parâmetro da requisição</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET feedback user</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/feedback/user</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data',
+        "Authorization": {token}
+        "id_user": 60,
+    }
+</pre>
+                <div>
+                    <p>id_user: deve ser passado como parâmetro da requisição o id do usuario</p>
+                    <p>Essa pesquisa retornará todos Feedback do usuário independente do status</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+</div>

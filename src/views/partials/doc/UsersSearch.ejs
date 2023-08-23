@@ -1,0 +1,53 @@
+<div class="row">
+    <section class="col-md-8">
+        <h2>Advance users search</h2>
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET users by id</h2>
+            <div>
+                <h4>URL</h4>
+                <pre> <%= urlBase.url %>/api/users/id </pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        method: "GET",
+        Authorization: {token},
+        id_user: 1,
+    }
+</pre>
+                    <div>
+                        <p>Se a autorização não for de nível administrador, vai trazer os dados do usuário logado.</p>
+                        <p>id_user: id do usuário deve ser passado como parâmetro da requisição</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET users by email</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/users/email</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Content-Type": 'multipart/form-data',
+        "email": 'joaopedro',
+    }
+</pre>
+                <div>
+                    <p>Esta pesquisa só é válida para quem tem acesso de administrador, caso contrário o pedido será negado!</p>
+                    <p>email: se não informado o email exato da pesquisa, ela retornarar uma lista de emails com o nome compatível ao digitado</p>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
