@@ -1,0 +1,66 @@
+<div class="row">
+    <section class="col-md-8">
+        <h2>Auth Users</h2>
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET users auth Login</h2>
+            <div>
+                <h4>URL</h4>
+                <pre> <%= urlBase.url %>/api/auth/login</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "GET",
+        "Content-Type": 'application/json'
+    }
+</pre>
+                    <div>
+                        <p>Esta solicitação retorna um token com acesso do usuário que for encontrado com os mesmos dados.</p>
+                        <p>Casso tenha divergência de dados retornará um erro indicando o campo e tipo de erro.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4>Body da requisição</h4>
+                <div>
+<pre>
+    body = {
+        "email":"usertestauth@email.com",
+        "password": "passowrdtest123"
+    }
+</pre>
+                    <div>
+                        <p>email: é esperado um email válido já cadastrado no banco de dados</p>
+                        <p>password: Deve ser passado também uma senha para validação</p>
+                        <p>Retorna uma propriedade chamada token que deve ser usada para autorização nas rotas privadas, no mesmo objeto contera outros dados do usuário</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">GET users logout</h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/auth/logout</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "POST",
+        "Authorization": {token}
+    }
+</pre>
+                <div>
+                    <p>Apenas o token de autorização é necessário para esta requisição!</p>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

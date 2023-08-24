@@ -134,22 +134,35 @@ module.exports = {
     get_all_user_cart_pending: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
-            const id_token = req.token_decoded.id;
 
-            const response = await Cart.findAndCountAll({
-                where:{fk_id_user:id_user, status:'pending'},
-                limit: Number(size),
-                offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
-            })
-            
-            if( Number(id_token) !== Number(response.fk_id_user)){
-                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
-                if(!isAdminAuth){
-                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
-                }
+            const { id } = req.token_decoded;
+
+            //verificar se chegou algum id válido para esta solicitação
+            if(!id){ return res.status(401).json({msg:'Error token inválido imposível processar os dados'} )}
+
+            // deve se verificar se primeiro é um admnistrador que está fazendo a solicitação
+            const responseUser = await Users.findByPk(id)
+
+            if(responseUser.admin === 'true'){
+                const authAdminCart = await Cart.findAndCountAll({
+                    where:{ fk_id_user: id_user, status:'pending' },
+                    limit: Number(size),
+                    offset: Math.ceil(  Number(size) * (Number(page) -1) )
+                })
+                // se sim retorne todos os carrinhos do usuário baseado no id que ele forneçeu
+                return res.status(200).json(authAdminCart)
             }
-                        
-            return res.json(response)
+
+            //caso nao seja admin extraia o id do usuário do próprio token e retorne seu carrinho
+            const userCart = await Cart.findAndCountAll({
+                where:{fk_id_user: id, status: 'pending'},
+                limit:Number(size),
+                offset: Math.ceil( Number(size) * (Number(page) -1 ) ) 
+
+            })
+
+            return res.status(200).json(userCart)
+
         } catch (error) {
             const msg = {Error:'Erro ao tentar obter dados do servidor!'};
             console.log(error);
@@ -159,22 +172,34 @@ module.exports = {
     get_all_user_cart_approved: async (req, res) => {
         try {
             const {page, size, id_user} = req.headers;
-            const id_token = req.token_decoded.id;
 
-            const response = await Cart.findAndCountAll({
-                where:{fk_id_user:id_user, status:'approved'},
-                limit: Number(size),
-                offset: Math.ceil( Number(size) * ( Number(page) -1 ) )
-            })
+            const { id } = req.token_decoded;
 
-            if( Number(id_token) !== Number(response.fk_id_user)){
-                const isAdminAuth  = await Users.findOne({ where: { id_user: id_token, admin: 'true' }})
-                if(!isAdminAuth){
-                    return res.status(400).json({msg:'Autorização negada! dados incorretos'})
-                }
+            //verificar se chegou algum id válido para esta solicitação
+            if(!id){ return res.status(401).json({msg:'Error token inválido imposível processar os dados'} )}
+
+            // deve se verificar se primeiro é um admnistrador que está fazendo a solicitação
+            const responseUser = await Users.findByPk(id)
+
+            if(responseUser.admin === 'true'){
+                const authAdminCart = await Cart.findAndCountAll({
+                    where:{ fk_id_user: id_user, status:'approved' },
+                    limit: Number(size),
+                    offset: Math.ceil(  Number(size) * (Number(page) -1) )
+                })
+                // se sim retorne todos os carrinhos do usuário baseado no id que ele forneçeu
+                return res.status(200).json(authAdminCart)
             }
 
-            return res.json(response)
+            //caso nao seja admin extraia o id do usuário do próprio token e retorne seu carrinho
+            const userCart = await Cart.findAndCountAll({
+                where:{fk_id_user: id, status: 'approved'},
+                limit:Number(size),
+                offset: Math.ceil( Number(size) * (Number(page) -1 ) ) 
+
+            })
+
+            return res.status(200).json(userCart)
         } catch (error) {
             const msg = {Error:'Erro ao tentar obter dados do servidor!'};
             console.log(error);
