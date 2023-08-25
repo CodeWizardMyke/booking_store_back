@@ -1,11 +1,11 @@
 <div class="row">
+    <h2 class="text-center">Token Invalid - black list</h2>
     <section class="col-md-8">
-        <h2>Token Invalid</h2>
         <article class="mb-5">
-            <h2 class="mb-3 text-center">GET </h2>
+            <h2 class="mb-3 text-center">GET</h2>
             <div>
                 <h4>URL</h4>
-                <pre> <%= urlBase.url %>/api/</pre>
+                <pre> <%= urlBase.url %>/api/token/</pre>
             </div>
             <div>
                 <h4>Header da solicitação</h4>
@@ -14,27 +14,16 @@
     header = {
         "method": "GET",
         "Content-Type": 'application/json'
+        "Authorization": {token}
+        "page": 1,
+        "size": 25
     }
 </pre>
                     <div>
-                        <p>Esta solicitação retorna um token com acesso do usuário que for encontrado com os mesmos dados.</p>
-                        <p>Casso tenha divergência de dados retornará um erro indicando o campo e tipo de erro.</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h4>Body da requisição</h4>
-                <div>
-<pre>
-    body = {
-        "email":"usertestauth@email.com",
-        "password": "passowrdtest123"
-    }
-</pre>
-                    <div>
-                        <p>email: é esperado um email válido já cadastrado no banco de dados</p>
-                        <p>password: Deve ser passado também uma senha para validação</p>
-                        <p>Retorna uma propriedade chamada token que deve ser usada para autorização nas rotas privadas, no mesmo objeto contera outros dados do usuário</p>
+                        <p>Solicitção feita apenas por administradores, deve-se passar o token com a autorização no header</p>
+                        <p>Esta consulta vai retornar um array com todos os tokens invalidados armazenados na black list</p>
+                        <p>Page: númeração da paginação da sua aplicação é opcional</p>
+                        <p>Size: para delimitar a quantidade de items trazidos por página</p>
                     </div>
                 </div>
             </div>
@@ -43,10 +32,10 @@
     
     <section class="col-md-8">
         <article class="mb-5">
-            <h2 class="mb-3 text-center">GET </h2>
+            <h2 class="mb-3 text-center">POST </h2>
             <div>
                 <h4>URL</h4>
-                <pre><%= urlBase.url %>/api/</pre>
+                <pre><%= urlBase.url %>/api/token/</pre>
             </div>
             <div>
                 <h4>Header da solicitação</h4>
@@ -54,11 +43,55 @@
 <pre>
     header = {
         "method": "POST",
+        "Content-Type": "application/json"
         "Authorization": {token}
     }
 </pre>
                 <div>
                     <p>Apenas o token de autorização é necessário para esta requisição!</p>
+                </div>
+            </div>
+            <div>
+                <h4>Body da requisição</h4>
+                <div>
+<pre>
+    body = {
+        code:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjAsImlhdCI6MTY4NzcwNzc1NSwiZXhwIjoxNjg3NzM2NTU1fQ.Ql6oG9F3WIaXyoS1Z_iLXVbWQKjPEvWPhhMsR5aKKkU
+    }
+</pre>
+                    <div>
+                        <p>code: este campo deve ser preenchido sem a palavra chave barrier que vem do token,
+                            e deve ser preenchido com o código de um token, que por sua vez será adicionado a black list de forma manual.
+                        </p>
+                        <p>Requisição só é permitida por administradores</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="col-md-8">
+        <article class="mb-5">
+            <h2 class="mb-3 text-center">DELETE </h2>
+            <div>
+                <h4>URL</h4>
+                <pre><%= urlBase.url %>/api/token/</pre>
+            </div>
+            <div>
+                <h4>Header da solicitação</h4>
+                <div>
+<pre>
+    header = {
+        "method": "DELETE",
+        "Content-Type": "application/json"
+        "Authorization": {token}
+        "data": '2023-01-25'
+    }
+</pre>
+                <div>
+                    <p>Deve ser passado um token com permição de administrador para essa solicitação</p>
+                    <p>data: é esperado uma string contendo uma data válida, essa solicitação apagará todos os items na black 
+                        list -> token invalid, com data igual ou superior a informada no header da solicitação</p>
                 </div>
             </div>
         </article>

@@ -20,24 +20,16 @@ module.exports = {
         }
     },
     post: async (req, res) => {
-        try {
-            const catchErrors = validationResult(req);
-            if(catchErrors.errors.length){
-                req.file ? deleteBookImage(req.file.filename) : '';
-                return res.json(catchErrors)
-            };
-            
-            const {code} = req.body
+        const {code} = req.body
 
-            const response = await Token_invalid.create({code: code})
-           
-            return res.send(response)
-            
-        } catch (error) {
-            const msg = {Error:'Erro ao tentar adicionar dados do servidor!'};
-            console.log(error);
-            res.status(500).json(msg);
+        if(!code){
+            return res.status(401).json({msg:"Error o campo code está vazio"})
         }
+
+        const response = await Token_invalid.create({code: code})
+       
+        return res.json(response)
+        
     },
     delete: async (req, res) => {
         try {
