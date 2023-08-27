@@ -30,6 +30,7 @@ module.exports = {
     },
     post_user: async (req, res) => {
         try {
+            console.log(req.body)
             const catchErrors = validationResult(req);
             if(catchErrors.errors.length){
                 req.file ? deleteUsersImage(req.file.filename) : '';

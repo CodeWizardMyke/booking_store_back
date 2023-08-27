@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
     login_user: async (req, res) => {
+        console.log(req.body)
         const catchErrors = validationResult(req);
         if(catchErrors.errors.length){
             return res.status(401).json(catchErrors);
