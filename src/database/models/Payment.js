@@ -1,5 +1,4 @@
 
-
 module.exports = (sequelize, DataTypes) =>{ 
     const Payment = sequelize.define('Payment',{
         id_payment:{
