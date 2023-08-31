@@ -1,7 +1,13 @@
-rotas de usuarios testada e adicionado codigos https
+run to project 
 
+1- Execute: npm install
 
-A ser implementado a API
-    -exclusão de usuarios- se nao houver compras exclua dados de informação primeiro e apos exclua o usuario em simples
-    -VALIDAÇÃO ao criar um produto não deixar o formato .gif ser válido
-    -VALIDAÇÃO ao criar um carrinho de produtos validar o campo kindle common e special e processar se são iguais os esperados pelo back end
+2- Execute the command to install dependencies: npm install.
+3- Ensure that the MySQL relational database is installed on your machine.
+4- In the .envExample file, you'll find all the necessary environment variables required for database connection. Fill in all the variables with your server's information and rename the file to .env.
+Commands to create the database and its tables:
+
+5- Execute: npx sequelize-cli db:create.
+6- Execute: npx sequelize-cli db:migrate.
+7- Execute npm start 
+the application. It will be accessible at localhost:3000.
