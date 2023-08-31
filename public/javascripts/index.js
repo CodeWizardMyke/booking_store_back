@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function handdlerDisplayUpdate(id){
             //in dom get any div with passed id
             const div = document.querySelector( id + '-doc' );
-
             // verify if div exists and div have a clas list macth display on
             if(div && div.classList == 'display-on'){
 
@@ -51,16 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /*funções para estilizção*/
-    const floatingButton = document.querySelector(".floating-button");
-    const menuNav = document.querySelector('.doc-list')
-
-    floatingButton.addEventListener("click", function () {
-        menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-
-    document.querySelector('#nav-to-doc').addEventListener('click', ()=>{
-        menuNav.scrollIntoView({ behavior: "smooth", block: "center" });
-    })
 
 })

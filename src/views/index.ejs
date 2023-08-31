@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<%- include('partials/components/head') %>
+  <head>
+    <%- include('partials/components/head') %>
+  </head>
 <body>
   <main>
+
+    <header>
       <%- include('partials/components/header') %>
+    </header>
+
       <section class="parallax">
           <article class="container parallax-content">
                 <h1>BOOK STORE</h1>
@@ -58,8 +64,8 @@
           </article>
     
           <div class="bg-doc">
-            <article class="container">
-              <div class="documents_style" id="doc-select">
+            <article class="container doc-select">
+              <div class="documents_style " id="doc-select">
 
                 <!-- CRUD DOCUMENTATION START-->
                 <div id="crudbooks-doc" class="display-off"><%- include('partials/doc/BooksCrud') %></div>
@@ -91,10 +97,12 @@
       </section>
 
       <!-- documentação completa da api, sua visualização será feita atravez do click do usuário -->
-      
       <!-- fim da documentação-->
-      <div class="floating-button">Menu Doc</div>
-      <%- include('partials/components/footer') %>
+      <div class="container">
+        <footer class="py-5">
+          <%- include('partials/components/footer') %>
+        </footer>
+      </div>
     </main>
     <script src="/javascripts/index.js"></script>
 </body>

@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<%- include('partials/components/head') %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style>
-  body {
-    background-color: #f0f8ff;
-  }
-  .container {
-    text-align: justify;
-    background-color: #ffffff;
-    padding: 30px;
-    margin: 50px auto;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-</style>
+  <head>
+    <%- include('partials/components/head') %>
+  </head>
 <body>
   <main>
+    <header>
       <%- include('partials/components/header') %>
+    </header>
       <section class="parallax">
-        <div class="container">
-          <h1 class="mb-4">Sobre o Nosso Projeto</h1>
+        <div class="container bg-light py-5">
+          <h2 class="mb-4">Sobre o Nosso Projeto</h2>
           
           <p>Bem-vindo à página Sobre do nosso projeto! Estamos animados em apresentar a você a nossa API, que tem como objetivo oferecer funcionalidades avançadas para gerenciar usuários, carrinhos, feedbacks, pagamentos e muito mais. Este projeto é o resultado do nosso comprometimento em criar soluções eficientes e amigáveis ao usuário.</p>
           
-          <h2>Repositório no GitHub</h2>
+          <h4>Repositório no GitHub</h4>
           <p>O nosso projeto está hospedado no GitHub. Você pode conferir o repositório <a target="_blank" href="https://github.com/CodeWizardMyke/booking_store_back">aqui</a>.</p>
           
-          <h2>Visão Geral da API</h2>
+          <h4>Visão Geral da API</h4>
           <p>A nossa API foi projetada para capacitar os usuários com um conjunto abrangente de recursos para gerenciar vários aspectos de suas contas e transações. Seja um administrador gerenciando informações de usuários ou um usuário comum verificando o status do seu carrinho, a nossa API tem tudo o que você precisa.</p>
           
-          <h2>Recursos Principais</h2>
+          <h4>Recursos Principais</h4>
           <ul>
             <li>Funcionalidade avançada de busca de usuários para um gerenciamento eficiente.</li>
             <li>Gerenciamento simplificado de carrinhos, incluindo carrinhos pendentes e aprovados.</li>
@@ -41,12 +31,15 @@
           
           <p>Estamos dedicados a melhorar e expandir continuamente nossa API para atender às suas necessidades. Sinta-se à vontade para explorar a documentação para obter informações detalhadas sobre cada ponto de extremidade e como integrar nossa API aos seus projetos.</p>
           
-          <h2>Entre em Contato</h2>
+          <h5>Entre em Contato</h5>
           <p>Se você tiver alguma dúvida, feedback ou sugestão, não hesite em <a href="mailto:maikewilliam.dev@gmail.com">entrar em contato conosco</a>. Valorizamos sua opinião e estamos ansiosos para tornar sua experiência com nossa API ainda melhor.</p>
         </div>
         </section>
-
-      <%- include('partials/components/footer') %>
+        <div class="container">
+          <footer class="py-5">
+            <%- include('partials/components/footer') %>
+          </footer>
+        </div>
     </main>
 </body>
 </html>
