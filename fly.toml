@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for api-bookstore on 2023-09-02T09:31:18-03:00
+# fly.toml app configuration file generated for bs-backend on 2023-09-03T21:44:40-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "api-bookstore"
+app = "bs-backend"
 primary_region = "gru"
 
 [build]

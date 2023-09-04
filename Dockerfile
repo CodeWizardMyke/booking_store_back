@@ -34,9 +34,6 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
-RUN chmod +x ./entrypoint.sh
-
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-
-ENTRYPOINT ["./entrypoint.sh"]
+CMD [ "npm", "run", "start" ]
