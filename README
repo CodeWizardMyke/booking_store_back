@@ -1,5 +1,5 @@
 ******IMPORTANT******
-APLICAÇÃO DISPONÍVEM NO ENDEREÇO ACESSE -> https://api-bookstore.fly.dev/
+APLICAÇÃO DISPONÍVEM NO ENDEREÇO ACESSE -> https://app-node.fly.dev/
 
 run to project 
 
@@ -14,3 +14,5 @@ Commands to create the database and its tables:
 6- Execute: npx sequelize-cli db:migrate.
 7- Execute npm start 
 the application. It will be accessible at localhost:3000.
+
+houve problemas ao usar o dotenv para ambientes de variáveis o fly.io por algum motivo não esta conseguindo acessar esses dados, assim digitando os dados de conexão do banco de dados diretamente na configuração a conexão com o BD é realizado com sucesso.
