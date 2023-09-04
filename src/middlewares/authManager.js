@@ -18,6 +18,8 @@ const authManager = async (req, res, next) => {
     try {
         const secret = process.env.JWT_KEY
         jwt.verify(token, secret, async (error, decoded) => {
+
+            console.log(token)
             if (error) {
                 return res.status(401).json({ msg: 'Acesso negado!' });
             }
@@ -29,6 +31,7 @@ const authManager = async (req, res, next) => {
             if (!userAuthorization) {
                 return res.status(401).json({ msg: 'Solicitação inválida' });
             }
+            req.token_decoded = decoded 
     
             next(); // Move o next() para dentro do bloco de sucesso da autorização
         

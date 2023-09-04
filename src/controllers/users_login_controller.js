@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
     login_user: async (req, res) => {
-        console.log(req.body)
         const catchErrors = validationResult(req);
         if(catchErrors.errors.length){
             return res.status(401).json(catchErrors);
@@ -31,10 +30,9 @@ module.exports = {
                 secret,
                 //{expiresIn:'4h'}
             );
-            user.password = undefined;
-            user.email = undefined;
-            
+
             return res.json({token, user})
+
         } catch (error) {
             const msg = {Error:'Erro ao lado do servidor!'};
             console.log(error);

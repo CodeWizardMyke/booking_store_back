@@ -35,6 +35,9 @@ module.exports = {
             };
             req.body.front_cover = req.file.filename;
             req.body.status = 'active';
+            req.body.kindle_price = Number(req.body.kindle_price)
+            req.body.common_price = Number(req.body.common_price)
+            req.body.special_price = Number(req.body.special_price)
 
             const response = await Books.create(req.body);
             res.json(response);

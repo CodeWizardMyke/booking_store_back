@@ -64,11 +64,14 @@ module.exports = {
                 return res.json(catchErrors)
             }
 
-            const emailExists = await Users.findAll({where:{email:req.body.email}})
-            if(emailExists.length){
-                req.file ? deleteUsersImage(req.file.filename) : '';
-                return res.status(409).json({error:{email:'email já cadastrado no sistema'}});
-            };
+            if( req.body.email ){
+                const emailExists = await Users.findAll({where:{email:req.body.email}})
+                
+                if(emailExists.length){
+                    req.file ? deleteUsersImage(req.file.filename) : '';
+                    return res.status(409).json({error:{email:'email já cadastrado no sistema'}});
+                };
+            }
             
             const {id} = req.token_decoded;
             if(!id){
