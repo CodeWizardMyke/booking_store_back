@@ -1,0 +1,4 @@
+[{"id_cart":510, "item_price":16.0, "request_price":16.0, "status":"approved", "status_delivery":"", "qtd_items":1, "type_selected":"kindle", "user_cpf":"", "fk_id_books":6, "fk_id_user":60},
+ {"id_cart":511, "item_price":46.0, "request_price":46.0, "status":"pending", "status_delivery":"", "qtd_items":1, "type_selected":"kindle", "user_cpf":"", "fk_id_books":7, "fk_id_user":60},
+ {"id_cart":514, "item_price":35.0, "request_price":35.0, "status":"pending", "status_delivery":"", "qtd_items":1, "type_selected":"kindle", "user_cpf":"", "fk_id_books":4, "fk_id_user":62},
+ {"id_cart":519, "item_price":5.0, "request_price":5.0, "status":"pending", "status_delivery":"", "qtd_items":1, "type_selected":"kindle", "user_cpf":"", "fk_id_books":5, "fk_id_user":62}]

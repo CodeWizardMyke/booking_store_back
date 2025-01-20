@@ -1,0 +1,1 @@
+[{"id_payment":35, "api_payment_id":1316004203, "api_mechant_order":"10040713366", "api_payment_type":"credit_card", "fk_id_user":60, "fk_id_cart":510, "status":"approved", "price":16.0, "createdAt":"2023-06-25 13:41:54", "updatedAt":"2023-06-25 13:41:54"}]
