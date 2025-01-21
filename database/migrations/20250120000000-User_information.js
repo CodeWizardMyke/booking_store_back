@@ -25,7 +25,7 @@ module.exports = {
       fk_id_user:{
         type:Sequelize.INTEGER,
         references:{
-          model:'Users',
+          model:'users',
           key:"id_user"
         }
       },

@@ -10,8 +10,12 @@ const config = require(__dirname + '/../config/config.js');
 const db = {};
 
 let sequelize;
+
+// Configura o Sequelize com base na variável de ambiente ou configurações padrão
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], { 
+    logging: false // Você pode ajustar isso
+  });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
