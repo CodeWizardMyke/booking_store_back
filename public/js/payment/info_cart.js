@@ -102,7 +102,7 @@ function insert_user_cart (response){
 };
 
 // REPLACE WITH YOUR PUBLIC KEY AVAILABLE IN: https://developers.mercadopago.com/panel
-const youKey = ''
+const youKey = 'TEST-f37e5f30-0bcd-4553-be68-34e281670e15'
 
 const mercadopago = youKey !== '' ? new MercadoPago(youKey, {locale: 'pt-BR'}) : undefined
 

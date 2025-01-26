@@ -8,7 +8,7 @@ const urlBase ={
     sucess : 'http://localhost:3000/api/mp/get',
     faill: 'http://localhost:3000/'
 };
-
+console.log('process.env.MERCADOPAGOTOKEN', process.env.MERCADOPAGOTOKEN)
 const api_mercado_pago = {
     post_preference: async (req, res) => {
         const {id} = req.id_user

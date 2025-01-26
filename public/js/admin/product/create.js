@@ -14,10 +14,10 @@ document.getElementById('myForm').addEventListener('submit', async event => {
   const response = await promisse.json();
   
   updateErrorsInFields();
-  handdlerPromisse(promisse, response);
+  handdlerPromisseProductCreate(promisse, response);
 });
 
-function handdlerPromisse(promisse, response){
+function handdlerPromisseProductCreate(promisse, response){
   switch (promisse.status) {
     case 201:
       sucessRegisteredProduct();
