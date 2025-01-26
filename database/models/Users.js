@@ -17,7 +17,12 @@ const Users = (sequelize, DataTypes) =>{
         user_avatar:DataTypes.STRING,
         admin:DataTypes.STRING,
         status:DataTypes.STRING
-    })
+    },
+    {
+        tableName:'users',
+        timestamps:false
+    }
+)
 
     Users.associate = (models) => {
         Users.hasMany(models.User_information, {foreignKey: 'fk_id_user', as: 'information'})
